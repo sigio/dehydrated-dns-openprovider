@@ -27,7 +27,7 @@ if ( handler == 'deploy_challenge'):
     add = [ { 'type': 'TXT', 'name': acme, 'value': challenge, 'ttl': ttl } ]
     postdata = {'name': domain, 'records': { 'add': add } }
 elif ( handler == 'clean_challenge'):
-    delchal= '"' + challenge + '"'
+    delchal= '"' + challenge + '"'  # I think the OpenProvider API is broken here...
     remove = [ { 'type': 'TXT', 'name': acme, 'value': delchal, 'ttl': ttl, 'creation_date': "", 'modification_date': ""} ]
     postdata = {'name': domain, 'records': { 'remove': remove } }
 else:
