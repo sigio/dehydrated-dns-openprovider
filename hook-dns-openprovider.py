@@ -18,18 +18,22 @@ domain = sys.argv[2]
 challenge = sys.argv[4]
 
 # Try logging in to get a bearer-token
-username = os.environ['OPENPROVIDER_API_USERNAME']
-password = os.environ['OPENPROVIDER_API_PASSWORD']
-sourceip = "0.0.0.0"
-postdata = { "username": username, "password": password, "ip": sourceip  }
-resp = requests.post(url=api + "/auth/login", data = json.dumps(postdata) )
+try:
+    bearer = os.environ['OPENPROVIDER_API_TOKEN']
+except:
+    username = os.environ['OPENPROVIDER_API_USERNAME']
+    password = os.environ['OPENPROVIDER_API_PASSWORD']
 
-if (resp.ok):
-    data = json.loads(resp.text)
-    bearer = data['data']['token']
-else:
-    print("Couldn't get a bearer-token, password incorrect?")
-    sys.exit(20)
+    sourceip = "0.0.0.0"
+    postdata = { "username": username, "password": password, "ip": sourceip  }
+    resp = requests.post(url=api + "/auth/login", data = json.dumps(postdata) )
+
+    if (resp.ok):
+        data = json.loads(resp.text)
+        bearer = data['data']['token']
+    else:
+        print("Couldn't get a bearer-token, password incorrect?")
+        sys.exit(20)
 
 headers = { "Content-Type": "application/json", "Authorization": "Bearer " + bearer }
 
