@@ -8,8 +8,7 @@ import os
 argc = len(sys.argv)
 
 if ( argc != 5):
-    print("Wrong number of arguments:",argc)
-    sys.exit(1)
+    sys.exit(0)
 
 api = "https://api.openprovider.eu/v1beta"
 acme = "_acme-challenge"
