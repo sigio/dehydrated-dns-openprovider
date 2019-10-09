@@ -45,5 +45,11 @@ else:
 
 resp = requests.put(url=api + "/dns/zones/" + domain, data=json.dumps(postdata), headers=headers )
 print(resp.json())
+responsedata = json.loads(resp.text)
 
-sys.exit(resp.ok)
+if (resp.ok == True):
+    sys.exit(0)
+elif ( responsedata['desc'] == "Duplicate record" ):
+    sys.exit(0)
+else:
+    sys.exit(1)
