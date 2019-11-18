@@ -37,7 +37,6 @@ except:
     subdomain = ""
     superdomain = domain
 
-
 headers = { "Content-Type": "application/json", "Authorization": "Bearer " + bearer }
 
 if ( handler == 'deploy_challenge'):
@@ -53,5 +52,5 @@ else:
 resp = requests.put(url=api + "/dns/zones/" + superdomain, data=json.dumps(postdata), headers=headers )
 print(resp.json())
 
-sys.exit(resp.ok)
+sys.exit(0)
 
